@@ -16,3 +16,8 @@ export const getPokemonsSuccess = createAction(
 	`[Guess Component] getPokemonsSuccess`,
 	props<{ pokemons: Pokemon[] }>(),
 );
+export const deletePokemon = createAction(
+	`[Guess Component] deletePokemon`,
+	props<{ number: number }>(),
+);
+export const setPokemon = createAction(`[Guess Component] setPokemon`);

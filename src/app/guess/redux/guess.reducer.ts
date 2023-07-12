@@ -43,6 +43,16 @@ export const guessReducer = createReducer(
 		pokemonList: action.pokemons,
 		loadingPokemons: false,
 	})),
+	on(GuessActions.deletePokemon, (state, action) => {
+		const pokemonList = state.pokemonList.filter(
+			(pokemon) => pokemon.number !== action.number,
+		);
+		return {
+			...state,
+			board: { ...state.board },
+			pokemonList,
+		};
+	}),
 );
 
 export function reducer(state: GuessGlobalState, action: Action) {

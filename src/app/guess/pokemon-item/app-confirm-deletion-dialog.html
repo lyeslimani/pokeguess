@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Delete Pokémon</h1>
+<div mat-dialog-content>Would you like to delete this pokémon ?</div>
+<div mat-dialog-actions>
+	<button mat-button mat-dialog-close>No</button>
+	<button mat-button mat-dialog-close (click)="data.deleteAction()">
+		Ok
+	</button>
+</div>

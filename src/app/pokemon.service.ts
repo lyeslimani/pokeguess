@@ -20,4 +20,8 @@ export class PokemonService {
 		console.log(pokemons);
 		return of(pokemons).pipe(delay(200));
 	}
+
+	savePokemonList(pokemons: Pokemon[]) {
+		localStorage.setItem(`pokemons`, JSON.stringify(pokemons));
+	}
 }

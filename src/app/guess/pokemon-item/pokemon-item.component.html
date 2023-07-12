@@ -1,0 +1,49 @@
+<div
+	class="pokemon-card grid grid-cols-12 gap-2 overflow-hidden border-b-2 border-gray-600">
+	<div
+		(click)="openPokemonInfoDialog()"
+		class="pokemon-card col-span-4 h-full">
+		<img
+			*ngIf="imageUrl"
+			alt="{{ pokemon.name }}'s picture"
+			class="h-full object-scale-down"
+			src="{{ imageUrl }}" />
+	</div>
+	<div
+		(click)="openPokemonInfoDialog()"
+		class="pokemon-card col-span-4 h-full flex items-center">
+		<div>n°{{ pokemon.number }}</div>
+		<div class="ms-2">{{ pokemon.name }}</div>
+	</div>
+	<div class="pokemon-card flex items-center col-span-2">
+		<mat-chip-listbox aria-label="Fish selection">
+			<mat-chip-option
+				[ngStyle]="{ 'background-color': getTypeColor(pokemon.type1) }"
+				[selectable]="false"
+				>{{ pokemon.type1 }}</mat-chip-option
+			>
+			<mat-chip-option
+				*ngIf="pokemon.types > 1"
+				[ngStyle]="{ 'background-color': getTypeColor(pokemon.type2) }"
+				[selectable]="false"
+				>{{ pokemon.type2 }}</mat-chip-option
+			>
+		</mat-chip-listbox>
+	</div>
+	<button
+		[matMenuTriggerFor]="menu"
+		aria-label="Example icon-button with a menu"
+		mat-icon-button>
+		<mat-icon>more_vert</mat-icon>
+	</button>
+	<mat-menu #menu="matMenu">
+		<button mat-menu-item>
+			<mat-icon>edit</mat-icon>
+			<span>Edit</span>
+		</button>
+		<button mat-menu-item (click)="openDeletionDialog()">
+			<mat-icon>delete</mat-icon>
+			<span>Delete</span>
+		</button>
+	</mat-menu>
+</div>
