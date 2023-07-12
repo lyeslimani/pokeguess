@@ -2287,6 +2287,13 @@
     "@material/theme" "15.0.0-canary.b994146f6.0"
     tslib "^2.1.0"
 
+"@ngrx/effects@^16.1.0":
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-16.1.0.tgz#6d8f46d15d32f13fac518361ab376bffb4138108"
+  integrity sha512-sdLzxjdQcYht3SYiuhchF4uOxxZIy3h9TEoyVp6PZJmiLJqhMAmV9/+s3tPD7yKd4+4o4n+HeiLDOTlMxn3Bxg==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngrx/eslint-plugin@^16.1.0":
   version "16.1.0"
   resolved "https://registry.yarnpkg.com/@ngrx/eslint-plugin/-/eslint-plugin-16.1.0.tgz#4d34bd9dd8abe07e1370199e3c549438a4ce81e5"
@@ -2296,6 +2303,13 @@
     eslint-etc "^5.1.0"
     semver "^7.3.5"
     strip-json-comments "3.1.1"
+
+"@ngrx/store-devtools@^16.1.0":
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-16.1.0.tgz#7452d6dbf5e14de3626a72d8cebe734aa7279835"
+  integrity sha512-7MKvmdRhAoIClOX9KkIeeQxe6c/uUqe1UcjFTABsquioSac4r/TxfUkmelSjtlQLBXiUAKTc9icqhZzfyMI0gw==
+  dependencies:
+    tslib "^2.0.0"
 
 "@ngrx/store@^16.1.0":
   version "16.1.0"

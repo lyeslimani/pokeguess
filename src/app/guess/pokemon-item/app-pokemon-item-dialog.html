@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>N°{{ data.pokemon.number }} {{ data.pokemon.name }}</h1>
+<div mat-dialog-content>
+	<div class="pokemon-details">
+		<div>
+			<img [src]="photoUrl" alt="{{ data.pokemon.name }}'s picture" />
+		</div>
+		<div>
+			<div class="mb-5">
+				<div>
+					<span>Height:</span>
+					<span>{{ data.pokemon.height }}</span>
+				</div>
+				<div>
+					<span>Weight:</span>
+					<span>{{ data.pokemon.weight }}</span>
+				</div>
+			</div>
+			<div class="mb-5">
+				<span>Types:</span>
+				<mat-chip-listbox aria-label="Fish selection">
+					<mat-chip-option
+						[ngStyle]="{
+							'background-color': getTypeColor(data.pokemon.type1)
+						}"
+						[selectable]="false"
+						>{{ data.pokemon.type1 }}</mat-chip-option
+					>
+					<mat-chip-option
+						*ngIf="data.pokemon.types > 1"
+						[ngStyle]="{
+							'background-color': getTypeColor(data.pokemon.type2)
+						}"
+						[selectable]="false"
+						>{{ data.pokemon.type2 }}</mat-chip-option
+					>
+				</mat-chip-listbox>
+			</div>
+			<div>
+				<span>Battle Stats:</span>
+				<p>Attack: {{ data.pokemon.attack }}</p>
+				<p>Defense: {{ data.pokemon.defense }}</p>
+				<p>Speed: {{ data.pokemon.speed }}</p>
+				<p>HP: {{ data.pokemon.hp }}</p>
+				<p>SP Attack: {{ data.pokemon.special }}</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div mat-dialog-actions>
+	<button (click)="onNoClick()" mat-button>Close</button>
+</div>
