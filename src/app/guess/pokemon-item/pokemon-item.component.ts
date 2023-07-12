@@ -1,25 +1,20 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Pokemon } from '../../shared/interfaces/pokemon';
-import {
-	MAT_DIALOG_DATA,
-	MatDialog,
-	MatDialogModule,
-	MatDialogRef,
-} from '@angular/material/dialog';
-import { NgIf, NgStyle } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 import { getImageUrl } from '../../shared/tools/getPokemonPhotoUrl';
-import { MatButtonModule } from '@angular/material/button';
-import { MatChipsModule } from '@angular/material/chips';
-import { getTypeColor } from '../../shared/tools/getTypeColor';
 import { Store } from '@ngrx/store';
 import { GuessGlobalState } from '../redux/guess.reducer';
 import * as GuessActions from '../redux/guess.actions';
+import { ConfirmDeletionDialogComponent } from './app-confirm-deletion-dialog';
+import { AppDialogDataExampleDialogComponent } from './app-pokemon-item-dialog';
+import { getTypeColor } from '../../shared/tools/getTypeColor';
+import { AppEditPokemonDialogComponent } from './app-edit-pokemon-dialog';
 
-interface DialogData {
+export interface PokemonDialogData {
 	pokemon: Pokemon;
 }
 
-interface ConfirmDeletionDialogData {
+export interface ConfirmDeletionDialogData {
 	deleteAction: () => void;
 }
 
@@ -58,6 +53,15 @@ export class PokemonItemComponent implements OnInit {
 		});
 	}
 
+	openEditDialog(): void {
+		this.dialog.open(AppEditPokemonDialogComponent, {
+			width: `250px`,
+			data: {
+				pokemon: this.pokemon,
+			},
+		});
+	}
+
 	deletePokemon() {
 		this.store.dispatch(
 			GuessActions.deletePokemon({ number: this.pokemon.number }),
@@ -65,40 +69,4 @@ export class PokemonItemComponent implements OnInit {
 	}
 
 	protected readonly getTypeColor = getTypeColor;
-	protected readonly confirm = confirm;
-}
-
-@Component({
-	selector: `app-pokemon-item-dialog`,
-	templateUrl: `app-pokemon-item-dialog.html`,
-	styleUrls: [`./pokemon-item.component.scss`],
-	standalone: true,
-	imports: [MatDialogModule, NgIf, MatButtonModule, MatChipsModule, NgStyle],
-})
-class AppDialogDataExampleDialogComponent {
-	photoUrl = getImageUrl(this.data.pokemon);
-
-	constructor(
-		public dialogRef: MatDialogRef<AppDialogDataExampleDialogComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: DialogData,
-	) {}
-
-	onNoClick(): void {
-		this.dialogRef.close();
-	}
-
-	protected readonly getTypeColor = getTypeColor;
-}
-
-@Component({
-	selector: `app-confirm-deletion-dialog`,
-	templateUrl: `app-confirm-deletion-dialog.html`,
-	standalone: true,
-	imports: [MatDialogModule, MatButtonModule],
-})
-export class ConfirmDeletionDialogComponent {
-	constructor(
-		public dialogRef: MatDialogRef<ConfirmDeletionDialogComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: ConfirmDeletionDialogData,
-	) {}
 }

@@ -37,6 +37,19 @@ export class PokemonEffects {
 		);
 	});
 
+	editPokemon$ = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(GuessActions.editPokemon),
+			withLatestFrom(this.store.select(selectState)),
+			mergeMap((action) => {
+				this.pokemonService.savePokemonList(action[1].pokemonList);
+				return new Observable().pipe(
+					map(() => GuessActions.setPokemon()),
+				);
+			}),
+		);
+	});
+
 	constructor(
 		private actions$: Actions,
 		private pokemonService: PokemonService,

@@ -53,6 +53,18 @@ export const guessReducer = createReducer(
 			pokemonList,
 		};
 	}),
+	on(GuessActions.editPokemon, (state, action) => {
+		console.log(action.pokemon);
+		return {
+			...state,
+			board: { ...state.board },
+			pokemonList: state.pokemonList.map((pokemon) =>
+				pokemon.number === action.pokemon.number
+					? { ...pokemon, ...action.pokemon }
+					: pokemon,
+			),
+		};
+	}),
 );
 
 export function reducer(state: GuessGlobalState, action: Action) {

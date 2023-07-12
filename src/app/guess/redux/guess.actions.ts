@@ -21,3 +21,7 @@ export const deletePokemon = createAction(
 	props<{ number: number }>(),
 );
 export const setPokemon = createAction(`[Guess Component] setPokemon`);
+export const editPokemon = createAction(
+	`[Guess Component] editPokemon`,
+	props<{ pokemon: Partial<Pokemon> }>(),
+);

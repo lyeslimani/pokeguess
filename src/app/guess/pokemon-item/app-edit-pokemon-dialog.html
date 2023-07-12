@@ -1,0 +1,114 @@
+<h1 mat-dialog-title>N°{{ data.pokemon.number }} {{ data.pokemon.name }}</h1>
+<div mat-dialog-content>
+	<div class="pokemon-details">
+		<mat-form-field class="w-full">
+			<mat-label>Name</mat-label>
+			<input
+				matInput
+				type="text"
+				[formControl]="pokemonEditForm.controls.name" />
+			<button
+				*ngIf="pokemonEditForm.value.name"
+				matSuffix
+				mat-icon-button
+				aria-label="Clear"
+				(click)="pokemonEditForm.value.name = ''">
+				<mat-icon>close</mat-icon>
+			</button>
+		</mat-form-field>
+
+		<div>
+			<img [src]="photoUrl" alt="{{ data.pokemon.name }}'s picture" />
+		</div>
+		<div>
+			<div class="mb-5">
+				<div>
+					<span>Height:</span>
+					<mat-form-field class="w-full">
+						<mat-label>Height</mat-label>
+						<input
+							matInput
+							type="number"
+							[formControl]="pokemonEditForm.controls.height" />
+					</mat-form-field>
+				</div>
+				<div>
+					<span>Weight:</span>
+					<mat-form-field class="w-full">
+						<mat-label>Weight</mat-label>
+						<input
+							matInput
+							type="number"
+							[formControl]="pokemonEditForm.controls.weight" />
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="mb-5">
+				<span>Types:</span>
+				<mat-chip-listbox aria-label="Fish selection">
+					<mat-chip-option
+						[ngStyle]="{
+							'background-color': getTypeColor(data.pokemon.type1)
+						}"
+						[selectable]="false"
+						>{{ data.pokemon.type1 }}
+					</mat-chip-option>
+					<mat-chip-option
+						*ngIf="data.pokemon.types > 1"
+						[ngStyle]="{
+							'background-color': getTypeColor(data.pokemon.type2)
+						}"
+						[selectable]="false"
+						>{{ data.pokemon.type2 }}
+					</mat-chip-option>
+				</mat-chip-listbox>
+			</div>
+			<div>
+				<span>Battle Stats:</span>
+				<mat-form-field class="w-full">
+					<mat-label>Attack</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonEditForm.controls.attack" />
+				</mat-form-field>
+				<mat-form-field class="w-full">
+					<mat-label>Defense</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonEditForm.controls.defense" />
+				</mat-form-field>
+				<mat-form-field class="w-full">
+					<mat-label>Speed</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonEditForm.controls.speed" />
+				</mat-form-field>
+				<mat-form-field class="w-full">
+					<mat-label>HP</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonEditForm.controls.hp" />
+				</mat-form-field>
+				<mat-form-field class="w-full">
+					<mat-label>Special Attack</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonEditForm.controls.special" />
+				</mat-form-field>
+			</div>
+		</div>
+	</div>
+
+	<button (click)="onNoClick()" mat-button>Close</button>
+	<button
+		(click)="onSubmit()"
+		[disabled]="pokemonEditForm.invalid"
+		mat-button>
+		Confirm
+	</button>
+</div>
