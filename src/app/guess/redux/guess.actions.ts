@@ -25,3 +25,7 @@ export const editPokemon = createAction(
 	`[Guess Component] editPokemon`,
 	props<{ pokemon: Partial<Pokemon> }>(),
 );
+export const duplicatePokemon = createAction(
+	`[Guess Component] duplicatePokemon`,
+	props<{ pokemon: Partial<Pokemon> }>(),
+);

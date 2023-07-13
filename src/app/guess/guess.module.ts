@@ -11,18 +11,20 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @NgModule({
 	declarations: [AdminComponent, PokemonItemComponent],
-	imports: [
-		GuessRoutingModule,
-		CommonModule,
-		StoreModule.forFeature(`guess`, reducer),
-		EffectsModule.forFeature([PokemonEffects]),
-		MatChipsModule,
-		MatButtonModule,
-		MatIconModule,
-		MatMenuModule,
-	],
+    imports: [
+        GuessRoutingModule,
+        CommonModule,
+        StoreModule.forFeature(`guess`, reducer),
+        EffectsModule.forFeature([PokemonEffects]),
+        MatChipsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatButtonToggleModule,
+    ],
 })
 export class GuessModule {}

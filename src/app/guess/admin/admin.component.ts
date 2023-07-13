@@ -20,4 +20,9 @@ export class AdminComponent implements OnInit {
 	ngOnInit() {
 		this.store.dispatch(GuessActions.getPokemons());
 	}
+
+	resetStore() {
+		this.store.dispatch(GuessActions.reset());
+		window.location.reload();
+	}
 }

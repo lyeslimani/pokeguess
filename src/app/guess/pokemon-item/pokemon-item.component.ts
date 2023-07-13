@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { GuessGlobalState } from '../redux/guess.reducer';
 import * as GuessActions from '../redux/guess.actions';
 import { ConfirmDeletionDialogComponent } from './app-confirm-deletion-dialog';
+import { ConfirmDuplicationDialogComponent } from './app-confirm-duplication-dialog';
 import { AppDialogDataExampleDialogComponent } from './app-pokemon-item-dialog';
 import { getTypeColor } from '../../shared/tools/getTypeColor';
 import { AppEditPokemonDialogComponent } from './app-edit-pokemon-dialog';
@@ -49,6 +50,15 @@ export class PokemonItemComponent implements OnInit {
 			width: `250px`,
 			data: {
 				deleteAction: () => this.deletePokemon(),
+			},
+		});
+	}
+
+	openDuplicationDialog(): void {
+		this.dialog.open(ConfirmDuplicationDialogComponent, {
+			width: `250px`,
+			data: {
+				pokemon: this.pokemon,
 			},
 		});
 	}
