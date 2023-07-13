@@ -1,7 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Pokemon } from '../../shared/interfaces/pokemon';
 import * as GuessActions from './guess.actions';
-import { duplicatePokemon } from './guess.actions';
 
 export interface GuessGlobalState {
 	guesses: string[];
