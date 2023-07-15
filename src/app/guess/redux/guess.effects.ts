@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as GuessActions from './guess.actions';
-import {map, mergeMap, Observable, tap, withLatestFrom} from 'rxjs';
+import { map, mergeMap, Observable, tap, withLatestFrom } from 'rxjs';
 import { PokemonService } from '../../pokemon.service';
 import { Store } from '@ngrx/store';
 import { GuessGlobalState } from './guess.reducer';
@@ -51,6 +51,19 @@ export class PokemonEffects {
 	duplicatePokemon$ = createEffect(() => {
 		return this.actions$.pipe(
 			ofType(GuessActions.duplicatePokemon),
+			withLatestFrom(this.store.select(selectState)),
+			mergeMap((action) => {
+				this.pokemonService.savePokemonList(action[1].pokemonList);
+				return new Observable().pipe(
+					map(() => GuessActions.setPokemon()),
+				);
+			}),
+		);
+	});
+
+	createPokemon$ = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(GuessActions.createPokemon),
 			withLatestFrom(this.store.select(selectState)),
 			mergeMap((action) => {
 				this.pokemonService.savePokemonList(action[1].pokemonList);

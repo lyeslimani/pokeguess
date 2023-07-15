@@ -75,6 +75,25 @@ export const guessReducer = createReducer(
 			pokemonList,
 		};
 	}),
+	on(GuessActions.createPokemon, (state, action) => {
+		console.log(action.pokemon);
+		const nextNumber =
+			state.pokemonList.reduce((maxId, pokemon) => {
+				return Math.max(maxId, pokemon.number);
+			}, 0) + 1;
+
+		// @ts-ignore
+		const newPokemon: Pokemon = {
+			...action.pokemon,
+			number: nextNumber,
+		};
+		const pokemonList: Pokemon[] = [...state.pokemonList, newPokemon];
+		return {
+			...state,
+			board: { ...state.board },
+			pokemonList,
+		};
+	}),
 	on(GuessActions.editPokemon, (state, action) => {
 		console.log(action.pokemon);
 		return {

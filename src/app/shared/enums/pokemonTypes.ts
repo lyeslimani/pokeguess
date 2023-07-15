@@ -1,0 +1,33 @@
+enum PokemonType {
+	Fire = `fire`,
+	Grass = `grass`,
+	Electric = `electric`,
+	Water = `water`,
+	Ground = `ground`,
+	Rock = `rock`,
+	Fairy = `fairy`,
+	Poison = `poison`,
+	Bug = `bug`,
+	Dragon = `dragon`,
+	Psychic = `psychic`,
+	Flying = `flying`,
+	Fighting = `fighting`,
+	Normal = `normal`,
+}
+
+export const pokemonTypes: PokemonType[] = [
+	PokemonType.Fire,
+	PokemonType.Grass,
+	PokemonType.Electric,
+	PokemonType.Water,
+	PokemonType.Ground,
+	PokemonType.Rock,
+	PokemonType.Fairy,
+	PokemonType.Poison,
+	PokemonType.Bug,
+	PokemonType.Dragon,
+	PokemonType.Psychic,
+	PokemonType.Flying,
+	PokemonType.Fighting,
+	PokemonType.Normal,
+];
