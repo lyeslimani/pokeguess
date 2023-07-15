@@ -1,7 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Pokemon } from '../../shared/interfaces/pokemon';
 import * as GuessActions from './guess.actions';
-import { getImageUrl } from '../../shared/tools/getPokemonPhotoUrl';
 
 export interface GuessGlobalState {
 	guesses: string[];
@@ -43,6 +42,11 @@ export const guessReducer = createReducer(
 		board: { ...state.board },
 		pokemonList: action.pokemons,
 		loadingPokemons: false,
+	})),
+	on(GuessActions.reset, (state) => ({
+		...state,
+		board: { ...state.board },
+		pokemonList: [],
 	})),
 	on(GuessActions.deletePokemon, (state, action) => {
 		const pokemonList = state.pokemonList.filter(

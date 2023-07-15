@@ -22,4 +22,8 @@ export class PokemonService {
 	savePokemonList(pokemons: Pokemon[]) {
 		localStorage.setItem(`pokemons`, JSON.stringify(pokemons));
 	}
+
+	clearPokemonList() {
+		localStorage.removeItem(`pokemons`);
+	}
 }

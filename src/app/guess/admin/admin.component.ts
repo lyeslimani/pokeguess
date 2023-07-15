@@ -28,7 +28,6 @@ export class AdminComponent implements OnInit {
 
 	resetStore() {
 		this.store.dispatch(GuessActions.reset());
-		window.location.reload();
 	}
 
 	openCreateDialog(): void {
