@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Pokemon } from '../../shared/interfaces/pokemon';
 import * as GuessActions from './guess.actions';
+import { getImageUrl } from '../../shared/tools/getPokemonPhotoUrl';
 
 export interface GuessGlobalState {
 	guesses: string[];

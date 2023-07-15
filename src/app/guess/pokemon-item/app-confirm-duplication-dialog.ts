@@ -9,6 +9,8 @@ import { PokemonDialogData } from './pokemon-item.component';
 import * as GuessActions from '../redux/guess.actions';
 import { Store } from '@ngrx/store';
 import { GuessGlobalState } from '../redux/guess.reducer';
+import { Pokemon } from '../../shared/interfaces/pokemon';
+import { getImageUrl } from '../../shared/tools/getPokemonPhotoUrl';
 
 @Component({
 	selector: `app-confirm-duplication-dialog`,
@@ -23,12 +25,14 @@ export class ConfirmDuplicationDialogComponent {
 		private store: Store<GuessGlobalState>,
 	) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+	onNoClick(): void {
+		this.dialogRef.close();
+	}
 
 	onSubmit(): void {
-		const values = this.data.pokemon;
+		const pokemon: Pokemon = JSON.parse(JSON.stringify(this.data.pokemon));
+		pokemon.image = getImageUrl(pokemon);
+		const values = pokemon;
 		this.store.dispatch(GuessActions.duplicatePokemon({ pokemon: values }));
 		this.dialogRef.close();
 	}
