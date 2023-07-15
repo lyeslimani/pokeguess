@@ -9,7 +9,7 @@ import { PokemonDialogData } from './pokemon-item.component';
 import { getImageUrl } from '../../shared/tools/getPokemonPhotoUrl';
 import { getTypeColor } from '../../shared/tools/getTypeColor';
 import { MatChipsModule } from '@angular/material/chips';
-import { NgIf, NgStyle } from '@angular/common';
+import { NgForOf, NgIf, NgStyle } from '@angular/common';
 import {
 	FormControl,
 	FormGroup,
@@ -22,6 +22,9 @@ import { Pokemon } from '../../shared/interfaces/pokemon';
 import { Store } from '@ngrx/store';
 import { GuessGlobalState } from '../redux/guess.reducer';
 import * as GuessActions from '../redux/guess.actions';
+import { PokemonType, pokemonTypes } from '../../shared/enums/pokemonTypes';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
 	selector: `app-edit-pokemon-dialog`,
@@ -36,11 +39,18 @@ import * as GuessActions from '../redux/guess.actions';
 		ReactiveFormsModule,
 		MatIconModule,
 		NgIf,
+		NgForOf,
+		MatOptionModule,
+		MatSelectModule,
 	],
 })
 export class AppEditPokemonDialogComponent implements OnInit {
 	image = getImageUrl(this.data.pokemon);
 	isImageDeleted = false;
+	type1 = `None`;
+	type2 = `None`;
+	types = 1;
+	selectedTypes: PokemonType[] = [];
 
 	pokemonEditForm = new FormGroup({
 		name: new FormControl(this.data.pokemon.name, {
@@ -79,6 +89,10 @@ export class AppEditPokemonDialogComponent implements OnInit {
 			nonNullable: true,
 			validators: [Validators.required],
 		}),
+		types: new FormControl([], {
+			nonNullable: true,
+			validators: [Validators.required],
+		}),
 	});
 	protected readonly getTypeColor = getTypeColor;
 
@@ -90,13 +104,45 @@ export class AppEditPokemonDialogComponent implements OnInit {
 
 	ngOnInit() {
 		this.pokemonEditForm.controls.image.setValue(this.image);
+		this.types = this.data.pokemon.types;
+		this.selectedTypes.push(this.data.pokemon.type1 as PokemonType);
+
+		if (this.data.pokemon.types > 1) {
+			this.selectedTypes.push(this.data.pokemon.type2 as PokemonType);
+		}
+		// @ts-ignore
+		this.pokemonEditForm.controls.types.setValue(this.selectedTypes);
 	}
 
 	onNoClick(): void {
 		this.dialogRef.close();
 	}
 
+	addType(type: PokemonType) {
+		if (
+			this.selectedTypes.length < 2 &&
+			!this.selectedTypes.includes(type)
+		) {
+			this.selectedTypes.push(type);
+		}
+	}
+
+	removeType(type: PokemonType) {
+		this.selectedTypes = this.selectedTypes.filter((t) => t !== type);
+		// @ts-ignore
+		this.pokemonEditForm.controls.types.setValue(this.selectedTypes);
+	}
+
+	isTypeDisabled(): boolean {
+		return this.selectedTypes.length >= 2;
+	}
+
 	onSubmit(): void {
+		this.type1 = this.selectedTypes[0];
+		if (this.selectedTypes.length > 1) {
+			this.type2 = this.selectedTypes[1];
+			this.types = 2;
+		}
 		const values = this.getFormValues();
 		this.store.dispatch(GuessActions.editPokemon({ pokemon: values }));
 		this.dialogRef.close();
@@ -109,6 +155,9 @@ export class AppEditPokemonDialogComponent implements OnInit {
 			image: this.pokemonEditForm.controls.image.value,
 			height: this.pokemonEditForm.controls.height.value,
 			weight: this.pokemonEditForm.controls.weight.value,
+			type1: this.type1,
+			type2: this.type2,
+			types: this.selectedTypes.length,
 			attack: this.pokemonEditForm.controls.attack.value,
 			defense: this.pokemonEditForm.controls.defense.value,
 			hp: this.pokemonEditForm.controls.hp.value,
@@ -124,4 +173,6 @@ export class AppEditPokemonDialogComponent implements OnInit {
 	cancelImageDeletion(): void {
 		this.isImageDeleted = false;
 	}
+
+	protected readonly pokemonTypes = pokemonTypes;
 }

@@ -17,13 +17,13 @@
 				<mat-icon>close</mat-icon>
 			</button>
 		</mat-form-field>
-    <mat-form-field class="w-full">
-      <mat-label>Picture URL</mat-label>
-      <input
-        matInput
-        type="text"
-        [formControl]="pokemonCreateForm.controls.image" />
-    </mat-form-field>
+		<mat-form-field class="w-full">
+			<mat-label>Picture URL</mat-label>
+			<input
+				matInput
+				type="text"
+				[formControl]="pokemonCreateForm.controls.image" />
+		</mat-form-field>
 
 		<!--<div>
 			<img [src]="photoUrl" alt="{{ data.pokemon.name }}'s picture" />
@@ -45,6 +45,7 @@
 						[formControl]="pokemonCreateForm.controls.weight" />
 				</mat-form-field>
 			</div>
+
 			<div class="mb-5">
 				<span>Types:</span>
 				<mat-form-field class="w-full">
@@ -89,6 +90,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div>
 				<span>Battle Stats:</span>
 				<mat-form-field class="w-full">

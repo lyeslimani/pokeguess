@@ -34,10 +34,7 @@
 						[formControl]="pokemonEditForm.controls.image" />
 				</mat-form-field>
 			</div>
-			<button
-				*ngIf="!isImageDeleted"
-				mat-button
-				(click)="deleteImage()">
+			<button *ngIf="!isImageDeleted" mat-button (click)="deleteImage()">
 				Delete picture
 			</button>
 		</div>
@@ -65,26 +62,54 @@
 					</mat-form-field>
 				</div>
 			</div>
+
 			<div class="mb-5">
-				<span>Types:</span>
-				<mat-chip-listbox aria-label="Fish selection">
-					<mat-chip-option
-						[ngStyle]="{
-							'background-color': getTypeColor(data.pokemon.type1)
-						}"
-						[selectable]="false"
-						>{{ data.pokemon.type1 }}
-					</mat-chip-option>
-					<mat-chip-option
-						*ngIf="data.pokemon.types > 1"
-						[ngStyle]="{
-							'background-color': getTypeColor(data.pokemon.type2)
-						}"
-						[selectable]="false"
-						>{{ data.pokemon.type2 }}
-					</mat-chip-option>
-				</mat-chip-listbox>
+				<div *ngIf="selectedTypes.length < 2">
+					<span>Types:</span>
+					<mat-form-field class="w-full">
+						<mat-label>Select Types</mat-label>
+						<mat-select
+							multiple
+							[formControl]="pokemonEditForm.controls.types"
+							panelClass="type-select">
+							<mat-option
+								*ngFor="let type of pokemonTypes"
+								[value]="type"
+								(click)="addType(type)"
+								[disabled]="isTypeDisabled()"
+								[ngStyle]="{
+									'background-color': getTypeColor(type)
+								}">
+								<div>
+									{{ type }}
+								</div>
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div *ngIf="selectedTypes.length > 0">
+					<span>Types:</span>
+					<div class="selected-types">
+						<div
+							*ngFor="let type of selectedTypes"
+							class="selected-type">
+							<mat-chip-option
+								[ngStyle]="{
+									'background-color': getTypeColor(type)
+								}"
+								[selectable]="false"
+								>{{ type }}
+							</mat-chip-option>
+							<button
+								class="remove-button"
+								(click)="removeType(type)">
+								<mat-icon>close</mat-icon>
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
+
 			<div>
 				<span>Battle Stats:</span>
 				<mat-form-field class="w-full">
