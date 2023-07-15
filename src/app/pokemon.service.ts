@@ -16,8 +16,6 @@ export class PokemonService {
 			pokemons = pokemonList;
 		}
 
-		console.log(`on est laaa`);
-		console.log(pokemons);
 		return of(pokemons).pipe(delay(200));
 	}
 

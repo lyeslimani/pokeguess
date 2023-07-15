@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Pokemon } from '../../shared/interfaces/pokemon';
 import * as GuessActions from './guess.actions';
+import { getImageUrl } from '../../shared/tools/getPokemonPhotoUrl';
 
 export interface GuessGlobalState {
 	guesses: string[];
@@ -69,6 +70,25 @@ export const guessReducer = createReducer(
 			...state.pokemonList,
 			duplicatedPokemon,
 		];
+		return {
+			...state,
+			board: { ...state.board },
+			pokemonList,
+		};
+	}),
+	on(GuessActions.createPokemon, (state, action) => {
+		console.log(action.pokemon);
+		const nextNumber =
+			state.pokemonList.reduce((maxId, pokemon) => {
+				return Math.max(maxId, pokemon.number);
+			}, 0) + 1;
+
+		// @ts-ignore
+		const newPokemon: Pokemon = {
+			...action.pokemon,
+			number: nextNumber,
+		};
+		const pokemonList: Pokemon[] = [...state.pokemonList, newPokemon];
 		return {
 			...state,
 			board: { ...state.board },

@@ -1,0 +1,140 @@
+<h1 mat-dialog-title>Create a Pokemon</h1>
+<!-- Chercher comment proposer les différents types-->
+<div mat-dialog-content>
+	<div class="pokemon-details">
+		<mat-form-field class="w-full">
+			<mat-label>Name</mat-label>
+			<input
+				matInput
+				type="text"
+				[formControl]="pokemonCreateForm.controls.name" />
+			<button
+				*ngIf="pokemonCreateForm.value.name"
+				matSuffix
+				mat-icon-button
+				aria-label="Clear"
+				(click)="pokemonCreateForm.value.name = ''">
+				<mat-icon>close</mat-icon>
+			</button>
+		</mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Picture URL</mat-label>
+      <input
+        matInput
+        type="text"
+        [formControl]="pokemonCreateForm.controls.image" />
+    </mat-form-field>
+
+		<!--<div>
+			<img [src]="photoUrl" alt="{{ data.pokemon.name }}'s picture" />
+		</div>-->
+		<div>
+			<div class="mb-5">
+				<mat-form-field class="w-1/3 mr-8">
+					<mat-label>Height</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonCreateForm.controls.height" />
+				</mat-form-field>
+				<mat-form-field class="w-1/3">
+					<mat-label>Weight</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonCreateForm.controls.weight" />
+				</mat-form-field>
+			</div>
+			<div class="mb-5">
+				<span>Types:</span>
+				<mat-form-field class="w-full">
+					<mat-label>Select Types</mat-label>
+					<mat-select
+						multiple
+						[formControl]="pokemonCreateForm.controls.types"
+						panelClass="type-select">
+						<mat-option
+							*ngFor="let type of pokemonTypes"
+							[value]="type"
+							(click)="addType(type)"
+							[disabled]="isTypeDisabled()"
+							[ngStyle]="{
+								'background-color': getTypeColor(type)
+							}">
+							<div>
+								{{ type }}
+							</div>
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<div>
+					<span>Selected Types:</span>
+					<div class="selected-types">
+						<div
+							*ngFor="let type of selectedTypes"
+							class="selected-type">
+							<mat-chip-option
+								[ngStyle]="{
+									'background-color': getTypeColor(type)
+								}"
+								[selectable]="false"
+								>{{ type }}
+							</mat-chip-option>
+							<button
+								class="remove-button"
+								(click)="removeType(type)">
+								<mat-icon>close</mat-icon>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<span>Battle Stats:</span>
+				<mat-form-field class="w-full">
+					<mat-label>Attack</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonCreateForm.controls.attack" />
+				</mat-form-field>
+				<mat-form-field class="w-full">
+					<mat-label>Defense</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonCreateForm.controls.defense" />
+				</mat-form-field>
+				<mat-form-field class="w-full">
+					<mat-label>Speed</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonCreateForm.controls.speed" />
+				</mat-form-field>
+				<mat-form-field class="w-full">
+					<mat-label>HP</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonCreateForm.controls.hp" />
+				</mat-form-field>
+				<mat-form-field class="w-full">
+					<mat-label>Special Attack</mat-label>
+					<input
+						matInput
+						type="number"
+						[formControl]="pokemonCreateForm.controls.special" />
+				</mat-form-field>
+			</div>
+		</div>
+	</div>
+
+	<button (click)="onNoClick()" mat-button>Close</button>
+	<button
+		(click)="onSubmit()"
+		[disabled]="pokemonCreateForm.invalid"
+		mat-button>
+		Confirm
+	</button>
+</div>
