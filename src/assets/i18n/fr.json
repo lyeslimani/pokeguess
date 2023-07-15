@@ -27,5 +27,12 @@
   "deletePicture": "Supprimer l'image",
   "edit": "Modifier",
   "duplicate": "Dupliquer",
-  "delete": "Supprimer"
+  "delete": "Supprimer",
+  "game": "Jeu",
+  "admin": "Admin",
+  "pickAPokemon": "Choisissez un pokémon",
+  "pokedexNumber": "numéro du pokédex",
+  "verifyPokemon": "Vérifier le Pokemon",
+  "tries": "Tentatives",
+  "tryList": "Liste des essais"
 }

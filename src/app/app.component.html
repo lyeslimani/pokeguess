@@ -3,8 +3,8 @@
 		<header>
 			<div>
 				<ul>
-					<li (click)="lang('en')">English</li>
-					<li (click)="lang('fr')">French</li>
+					<li class="lang" (click)="lang('en')">English</li>
+					<li class="lang" (click)="lang('fr')">French</li>
 				</ul>
 			</div>
 			<div class="flex h-full items-center w-full">
@@ -22,12 +22,12 @@
 				<a
 					class="text-white text-2xl md:text-4xl grow"
 					routerLink="/game"
-					>Game</a
+					>{{ translationKeys.game | translate }}</a
 				>
 				<a
 					class="text-white text-2xl md:text-4xl grow"
 					routerLink="/admin"
-					>admin</a
+					>{{ translationKeys.admin | translate }}</a
 				>
 			</div>
 		</header>

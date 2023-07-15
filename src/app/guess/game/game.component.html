@@ -26,7 +26,7 @@
 							item.name
 						}}</span>
 					</div>
-					<small><b>numéro du pokédex:</b> {{ item.number }}</small>
+					<small><b>{{ translationKeys.pokedexNumber | translate }}:</b> {{ item.number }}</small>
 				</ng-template>
 			</ng-select>
 			<button
@@ -44,7 +44,7 @@
 			extended
 			mat-fab>
 			<mat-icon>search</mat-icon>
-			Vérifier le pokémon
+      {{ translationKeys.verifyPokemon | translate }}
 		</button>
 		<button
 			(click)="restartGame()"
@@ -60,14 +60,15 @@
 
 <div class="flex flex-row flex-wrap gap-x-2">
 	<p>
-		Tentatives: {{ (state$ | async)?.board?.tries }} /
+    {{ translationKeys.tries | translate }} {{ (state$ | async)?.board?.tries }} /
 		{{ NUMBER_OF_TRIES }}
 	</p>
 	<p>Score: {{ (state$ | async)?.board?.score }}</p>
 </div>
 
 <div>
-	<h2 class="text-2xl font-bold">Liste des essais:</h2>
+	<h2 class="text-2xl font-bold">
+    {{ translationKeys.tryList | translate }}:</h2>
 
 	<div class="grid grid-cols-1 gap-y-4">
 		<div *ngFor="let guess of (state$ | async)?.guesses; let i = index">

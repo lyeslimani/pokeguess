@@ -21,6 +21,7 @@ import { Pokemon } from '../../shared/interfaces/pokemon';
 import { getHint } from './hint';
 import { AppDialogDataExampleDialogComponent } from '../pokemon-item/app-pokemon-item-dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslationKeys } from '../../keys.interface';
 
 @Component({
 	selector: `app-game`,
@@ -28,6 +29,8 @@ import { MatDialog } from '@angular/material/dialog';
 	styleUrls: [`./game.component.scss`],
 })
 export class GameComponent implements OnInit {
+
+  translationKeys = TranslationKeys;
 	guessInput = new FormControl(``, [Validators.required]);
 	state$: Observable<GuessGlobalState>;
 	state!: GuessGlobalState;

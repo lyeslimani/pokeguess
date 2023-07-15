@@ -27,5 +27,13 @@ export enum TranslationKeys {
   deletePicture = 'deletePicture',
   edit = 'edit',
   duplicate = 'duplicate',
-  delete = 'delete'
+  delete = 'delete',
+  game = 'game',
+  admin = 'admin',
+  pickAPokemon = 'pickAPokemon',
+  pokedexNumber = 'pokedexNumber',
+  verifyPokemon = 'verifyPokemon',
+  tries = 'tries',
+  tryList = 'tryList'
+
 }
