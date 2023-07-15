@@ -32,8 +32,9 @@ export class ConfirmDuplicationDialogComponent {
 	onSubmit(): void {
 		const pokemon: Pokemon = JSON.parse(JSON.stringify(this.data.pokemon));
 		pokemon.image = getImageUrl(pokemon);
-		const values = pokemon;
-		this.store.dispatch(GuessActions.duplicatePokemon({ pokemon: values }));
+    this.store.dispatch(
+			GuessActions.duplicatePokemon({ pokemon: pokemon }),
+		);
 		this.dialogRef.close();
 	}
 }

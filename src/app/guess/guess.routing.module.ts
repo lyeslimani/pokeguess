@@ -1,11 +1,20 @@
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { NgModule } from '@angular/core';
+import { GameComponent } from './game/game.component';
 
 const routes: Routes = [
 	{
-		path: ``,
+		path: `admin`,
 		component: AdminComponent,
+	},
+	{
+		path: `game`,
+		component: GameComponent,
+	},
+	{
+		path: `**`,
+		redirectTo: `admin`,
 	},
 ];
 

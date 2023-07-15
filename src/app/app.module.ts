@@ -9,6 +9,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -27,6 +29,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 		RouterOutlet,
 		AppRoutingModule,
 		MatDialogModule,
+		NgSelectModule,
+		FormsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

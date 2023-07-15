@@ -11,20 +11,30 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { GameComponent } from './game/game.component';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 
 @NgModule({
-	declarations: [AdminComponent, PokemonItemComponent],
-    imports: [
-        GuessRoutingModule,
-        CommonModule,
-        StoreModule.forFeature(`guess`, reducer),
-        EffectsModule.forFeature([PokemonEffects]),
-        MatChipsModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatButtonToggleModule,
-    ],
+	declarations: [AdminComponent, PokemonItemComponent, GameComponent],
+	imports: [
+		GuessRoutingModule,
+		CommonModule,
+		StoreModule.forFeature(`guess`, reducer),
+		EffectsModule.forFeature([PokemonEffects]),
+		MatChipsModule,
+		MatButtonModule,
+		MatIconModule,
+		MatMenuModule,
+		MatButtonToggleModule,
+		MatInputModule,
+		FormsModule,
+		ReactiveFormsModule,
+		NgSelectModule,
+		NgOptionHighlightModule,
+	],
 })
 export class GuessModule {}

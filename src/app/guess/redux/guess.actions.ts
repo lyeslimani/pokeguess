@@ -9,8 +9,21 @@ export const removeLetter = createAction(
 	`[Guess Component] remove`,
 	props<{ letter: string }>,
 );
+export const guessPokemon = createAction(
+	`[Guess Component] guess`,
+	props<{ pokemon: Pokemon; hint: string; hintUsed: string }>(),
+);
+export const initGameFinished = createAction(
+	`[Guess Component] initGame`,
+	props<{ pokemon: Pokemon }>(),
+);
 export const reset = createAction(`[Guess Component] reset`);
 export const getGuess = createAction(`[Guess Component] getGuess`);
+export const finishGame = createAction(
+	`[Guess Component] finishGame`,
+	props<{ end: `won` | `lost` }>(),
+);
+export const restartGame = createAction(`[Guess Component] restartGame`);
 export const getPokemons = createAction(`[Guess Component] getPokemons`);
 export const getPokemonsSuccess = createAction(
 	`[Guess Component] getPokemonsSuccess`,

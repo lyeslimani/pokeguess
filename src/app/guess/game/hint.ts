@@ -1,7 +1,11 @@
 import { Pokemon } from '../../shared/interfaces/pokemon';
 import { PokemonType } from '../../shared/enums/pokemonTypes';
 
-function getHint(pokemonToFind: Pokemon, pokemon: Pokemon): string {
+export function getHint(
+	pokemonToFind: Pokemon,
+	pokemon: Pokemon,
+	hintUsed: string[],
+) {
 	const comparisonFunctions: ((
 		pokemonToFind: Pokemon,
 		pokemon: Pokemon,
@@ -39,14 +43,11 @@ function getHint(pokemonToFind: Pokemon, pokemon: Pokemon): string {
 		compareEvolutions,
 		compareLegendary,
 	];
-
-	const hintUsed: ((pokemonToFind: Pokemon, pokemon: Pokemon) => string)[] =
-		[];
-
 	let result = ``;
+	let randomFunction!: (pokemonToFind: Pokemon, pokemon: Pokemon) => string;
 	while (result === ``) {
 		const remainingFunctions = comparisonFunctions.filter(
-			(func) => !hintUsed.includes(func),
+			(func) => !hintUsed.includes(func.name),
 		);
 		if (remainingFunctions.length === 0) {
 			break;
@@ -55,11 +56,13 @@ function getHint(pokemonToFind: Pokemon, pokemon: Pokemon): string {
 		const randomIndex = Math.floor(
 			Math.random() * remainingFunctions.length,
 		);
-		const randomFunction = remainingFunctions[randomIndex];
+		randomFunction = remainingFunctions[randomIndex];
 		result = comparisonFunctions[randomIndex](pokemonToFind, pokemon);
-		hintUsed.push(randomFunction);
 	}
-	return result || `Aucun indice disponible.`;
+	return {
+		hint: result || `Aucun indice disponible.`,
+		hintUsed: randomFunction.name,
+	};
 }
 
 function compareNumber(pokemon1: Pokemon, pokemon2: Pokemon): string {

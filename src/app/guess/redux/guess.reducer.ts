@@ -1,33 +1,67 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Pokemon } from '../../shared/interfaces/pokemon';
 import * as GuessActions from './guess.actions';
+import { PokemonService } from '../../pokemon.service';
+
+export const NUMBER_OF_TRIES = 5;
 
 export interface GuessGlobalState {
-	guesses: string[];
+	guesses: Pokemon[];
+	guessesHint: string[];
+	guessesFunctions: string[];
 	board: {
-		status: `in progress` | `paused`;
+		status: `in progress` | `paused` | string;
 		score: number;
-		end: `won` | `lost` | `in progress`;
+		end: `won` | `lost` | `in progress` | string;
+		tries: number;
 	};
-	currentPokemon?: Pokemon;
+	currentPokemon: Pokemon;
 	pokemonList: Pokemon[];
 	loadingPokemons: boolean;
 }
 
 export const initialState: GuessGlobalState = {
 	guesses: [],
+	guessesHint: [],
+	guessesFunctions: [],
 	board: {
-		status: `paused`,
+		status: `in progress`,
 		score: 0,
 		end: `in progress`,
+		tries: 0,
 	},
-	currentPokemon: undefined,
+	currentPokemon: new PokemonService().getRandomPokemon(),
 	pokemonList: [],
 	loadingPokemons: true,
 };
 
 export const guessReducer = createReducer(
 	initialState,
+	on(GuessActions.restartGame, () => ({
+		...initialState,
+		currentPokemon: new PokemonService().getRandomPokemon(),
+	})),
+	on(GuessActions.guessPokemon, (state, action) => ({
+		...state,
+		guesses: [...state.guesses, action.pokemon],
+		guessesHint: [...state.guessesHint, action.hint],
+		board: {
+			...state.board,
+			tries: state.board.tries + 1,
+		},
+	})),
+	on(GuessActions.finishGame, (state, action) => ({
+		...state,
+		board: {
+			...state.board,
+			status: `paused`,
+			end: action.end,
+		},
+	})),
+	on(GuessActions.initGameFinished, (state, action) => ({
+		...state,
+		currentPokemon: action.pokemon,
+	})),
 	on(GuessActions.getGuess, (state) => ({
 		...state,
 		board: { ...state.board },
