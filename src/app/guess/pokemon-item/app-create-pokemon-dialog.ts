@@ -17,7 +17,7 @@ import { Store } from '@ngrx/store';
 import { GuessGlobalState } from '../redux/guess.reducer';
 import * as GuessActions from '../redux/guess.actions';
 import { MatSelectModule } from '@angular/material/select';
-import { pokemonTypes } from '../../shared/enums/pokemonTypes';
+import { PokemonType, pokemonTypes } from '../../shared/enums/pokemonTypes';
 
 @Component({
 	selector: `app-create-pokemon-dialog`,
@@ -38,6 +38,9 @@ import { pokemonTypes } from '../../shared/enums/pokemonTypes';
 })
 export class AppCreatePokemonDialogComponent {
 	pokemonTypes = pokemonTypes;
+	type1 = `None`;
+	type2 = `None`;
+	types = 1;
 	photoUrl = ``;
 	pokemonCreateForm = new FormGroup({
 		name: new FormControl(``, {
@@ -88,7 +91,33 @@ export class AppCreatePokemonDialogComponent {
 		this.dialogRef.close();
 	}
 
+	selectedTypes: PokemonType[] = [];
+
+	addType(type: PokemonType) {
+		if (
+			this.selectedTypes.length < 2 &&
+			!this.selectedTypes.includes(type)
+		) {
+			this.selectedTypes.push(type);
+		}
+	}
+
+	removeType(type: PokemonType) {
+		this.selectedTypes = this.selectedTypes.filter((t) => t !== type);
+		// @ts-ignore
+		this.pokemonCreateForm.controls.types.setValue(this.selectedTypes);
+	}
+
+	isTypeDisabled(): boolean {
+		return this.selectedTypes.length >= 2;
+	}
+
 	onSubmit(): void {
+		this.type1 = this.selectedTypes[0];
+		if (this.selectedTypes.length > 1) {
+			this.type2 = this.selectedTypes[1];
+			this.types = 2;
+		}
 		const values = this.getFormValues();
 		this.store.dispatch(GuessActions.createPokemon({ pokemon: values }));
 		this.dialogRef.close();
@@ -99,39 +128,14 @@ export class AppCreatePokemonDialogComponent {
 			name: this.pokemonCreateForm.controls.name.value,
 			height: parseFloat(this.pokemonCreateForm.controls.height.value),
 			weight: parseFloat(this.pokemonCreateForm.controls.weight.value),
+			type1: this.type1,
+			type2: this.type2,
+			types: this.types,
 			attack: parseFloat(this.pokemonCreateForm.controls.attack.value),
 			defense: parseFloat(this.pokemonCreateForm.controls.defense.value),
 			hp: parseFloat(this.pokemonCreateForm.controls.hp.value),
 			speed: parseFloat(this.pokemonCreateForm.controls.speed.value),
 			special: parseFloat(this.pokemonCreateForm.controls.special.value),
-			/*baseTotal: 0,
-      bugDmg: 0,
-      captRate: 0,
-      dragonDmg: 0,
-      electricDmg: 0,
-      evolutions: 0,
-      expPoints: 0,
-      expSpeed: "",
-      femalePct: 0,
-      fightDmg: 0,
-      fireDmg: 0,
-      flyingDmg: 0,
-      ghostDmg: 0,
-      grassDmg: 0,
-      groundDmg: 0,
-      iceDmg: 0,
-      image: "",
-      legendary: 0,
-      malePct: 0,
-      normalDmg: 0,
-      number: 0,
-      poisonDmg: 0,
-      psychicDmg: 0,
-      rockDmg: 0,
-      type1: "",
-      type2: "",
-      types: 0,
-      waterDmg: 0,*/
 		};
 	}
 }
