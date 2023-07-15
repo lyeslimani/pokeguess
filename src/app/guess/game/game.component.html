@@ -1,0 +1,91 @@
+<div class="mb-5">
+	<div>
+		<div class="grid grid-cols-12 items-center gap-x-2">
+			<ng-select
+				*ngIf="state$ | async"
+				[(ngModel)]="selection"
+				[clearable]="false"
+				[items]="(state$ | async)?.pokemonList ?? []"
+				[searchable]="true"
+				appearance="outline"
+				bindLabel="name"
+				class="col-span-10"
+				label="Choisissez un pokémon"
+				placeholder="Choisissez un pokémon">
+				<ng-template
+					let-item="item"
+					let-search="searchTerm"
+					ng-option-tmp>
+					<div>
+						<img
+							[src]="getImageUrl(item)"
+							alt="pokemon"
+							width="20" />
+						<span>Pokémon: </span
+						><span [ngOptionHighlight]="search">{{
+							item.name
+						}}</span>
+					</div>
+					<small><b>numéro du pokédex:</b> {{ item.number }}</small>
+				</ng-template>
+			</ng-select>
+			<button
+				(click)="openPokemonModal(selection)"
+				aria-label="Example icon button with a menu icon"
+				color="primary"
+				mat-mini-fab>
+				<mat-icon class="col-span-2">search</mat-icon>
+			</button>
+		</div>
+		<button
+			(click)="handleGuess()"
+			*ngIf="(state$ | async)?.board?.end === 'in progress'"
+			color="primary"
+			extended
+			mat-fab>
+			<mat-icon>search</mat-icon>
+			Vérifier le pokémon
+		</button>
+		<button
+			(click)="restartGame()"
+			*ngIf="(state$ | async)?.board?.end !== 'in progress'"
+			color="primary"
+			extended
+			mat-fab>
+			<mat-icon>play_arrow</mat-icon>
+			Relancer la partie
+		</button>
+	</div>
+</div>
+
+<div class="flex flex-row flex-wrap gap-x-2">
+	<p>
+		Tentatives: {{ (state$ | async)?.board?.tries }} /
+		{{ NUMBER_OF_TRIES }}
+	</p>
+	<p>Score: {{ (state$ | async)?.board?.score }}</p>
+</div>
+
+<div>
+	<h2 class="text-2xl font-bold">Liste des essais:</h2>
+
+	<div class="grid grid-cols-1 gap-y-4">
+		<div *ngFor="let guess of (state$ | async)?.guesses; let i = index">
+			<div
+				class="flex flex-row flex-wrap gap-x-2 h-16 border-b-4 dark:border-white border-black">
+				<img
+					(click)="openPokemonModal(guess)"
+					[src]="getImageUrl(guess)"
+					alt="pokemon"
+					class="object-contain h-full aspect-square" />
+				<div class="grid grid-cols-1 grid-rows-2">
+					<div>Essai {{ i + 1 }}</div>
+					<p>{{ guess.name }} - n° de pokédex: {{ guess.number }}</p>
+				</div>
+			</div>
+			<div class="italic text-gray-600">
+				{{ state.guessesHint[i] }}
+			</div>
+		</div>
+	</div>
+</div>
