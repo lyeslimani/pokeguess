@@ -1,4 +1,5 @@
 import { Pokemon } from '../../shared/interfaces/pokemon';
+import { PokemonType } from '../../shared/enums/pokemonTypes';
 
 function getHint(pokemonToFind: Pokemon, pokemon: Pokemon): string {
 	const comparisonFunctions: ((
@@ -251,154 +252,224 @@ function compareNormalDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
 }
 
 function compareFireDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.fireDmg && pokemon2.fireDmg) {
-		if (pokemon1.fireDmg > pokemon2.fireDmg) {
-			return `Il a des dégâts de type feu plus élevés !`;
-		} else if (pokemon1.fireDmg < pokemon2.fireDmg) {
-			return `Il a des dégâts de type feu moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Fire ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Fire)
+	) {
+		if (pokemon1.fireDmg) {
+			if (pokemon1.fireDmg > 1) {
+				return `Le pokemon est faible face à ton type feu !`;
+			} else if (pokemon1.fireDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type feu !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareWaterDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.waterDmg && pokemon2.waterDmg) {
-		if (pokemon1.waterDmg > pokemon2.waterDmg) {
-			return `Il a des dégâts de type eau plus élevés !`;
-		} else if (pokemon1.waterDmg < pokemon2.waterDmg) {
-			return `Il a des dégâts de type eau moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Water ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Water)
+	) {
+		if (pokemon1.waterDmg) {
+			if (pokemon1.waterDmg > 1) {
+				return `Le pokemon est faible face à ton type eau !`;
+			} else if (pokemon1.waterDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type eau !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareElectricDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.electricDmg && pokemon2.electricDmg) {
-		if (pokemon1.electricDmg > pokemon2.electricDmg) {
-			return `Il a des dégâts de type électrique plus élevés !`;
-		} else if (pokemon1.electricDmg < pokemon2.electricDmg) {
-			return `Il a des dégâts de type électrique moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Electric ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Electric)
+	) {
+		if (pokemon1.electricDmg) {
+			if (pokemon1.electricDmg > 1) {
+				return `Le pokemon est faible face à ton type électrique !`;
+			} else if (pokemon1.electricDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type électrique !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareGrassDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.grassDmg && pokemon2.grassDmg) {
-		if (pokemon1.grassDmg > pokemon2.grassDmg) {
-			return `Il a des dégâts de type plante plus élevés !`;
-		} else if (pokemon1.grassDmg < pokemon2.grassDmg) {
-			return `Il a des dégâts de type plante moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Grass ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Grass)
+	) {
+		if (pokemon1.grassDmg) {
+			if (pokemon1.grassDmg > 1) {
+				return `Le pokemon est faible face à ton type plante !`;
+			} else if (pokemon1.grassDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type plante !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareIceDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.iceDmg && pokemon2.iceDmg) {
-		if (pokemon1.iceDmg > pokemon2.iceDmg) {
-			return `Il a des dégâts de type glace plus élevés !`;
-		} else if (pokemon1.iceDmg < pokemon2.iceDmg) {
-			return `Il a des dégâts de type glace moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Ice ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Ice)
+	) {
+		if (pokemon1.iceDmg) {
+			if (pokemon1.iceDmg > 1) {
+				return `Le pokemon est faible face à ton type glace !`;
+			} else if (pokemon1.iceDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type glace !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareFightDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.fightDmg && pokemon2.fightDmg) {
-		if (pokemon1.fightDmg > pokemon2.fightDmg) {
-			return `Il a des dégâts de type combat plus élevés !`;
-		} else if (pokemon1.fightDmg < pokemon2.fightDmg) {
-			return `Il a des dégâts de type combat moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Fighting ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Fighting)
+	) {
+		if (pokemon1.fightDmg) {
+			if (pokemon1.fightDmg > 1) {
+				return `Le pokemon est faible face à ton type combat !`;
+			} else if (pokemon1.fightDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type combat !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function comparePoisonDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.poisonDmg && pokemon2.poisonDmg) {
-		if (pokemon1.poisonDmg > pokemon2.poisonDmg) {
-			return `Il a des dégâts de type poison plus élevés !`;
-		} else if (pokemon1.poisonDmg < pokemon2.poisonDmg) {
-			return `Il a des dégâts de type poison moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Poison ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Poison)
+	) {
+		if (pokemon1.poisonDmg) {
+			if (pokemon1.poisonDmg > 1) {
+				return `Le pokemon est faible face à ton type poison !`;
+			} else if (pokemon1.poisonDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type poison !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareGroundDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.groundDmg && pokemon2.groundDmg) {
-		if (pokemon1.groundDmg > pokemon2.groundDmg) {
-			return `Il a des dégâts de type sol plus élevés !`;
-		} else if (pokemon1.groundDmg < pokemon2.groundDmg) {
-			return `Il a des dégâts de type sol moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Ground ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Ground)
+	) {
+		if (pokemon1.groundDmg) {
+			if (pokemon1.groundDmg > 1) {
+				return `Le pokemon est faible face à ton type sol !`;
+			} else if (pokemon1.groundDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type sol !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareFlyingDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.flyingDmg && pokemon2.flyingDmg) {
-		if (pokemon1.flyingDmg > pokemon2.flyingDmg) {
-			return `Il a des dégâts de type vol plus élevés !`;
-		} else if (pokemon1.flyingDmg < pokemon2.flyingDmg) {
-			return `Il a des dégâts de type vol moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Flying ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Flying)
+	) {
+		if (pokemon1.flyingDmg) {
+			if (pokemon1.flyingDmg > 1) {
+				return `Le pokemon est faible face à ton type vol !`;
+			} else if (pokemon1.flyingDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type vol !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function comparePsychicDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.psychicDmg && pokemon2.psychicDmg) {
-		if (pokemon1.psychicDmg > pokemon2.psychicDmg) {
-			return `Il a des dégâts de type psy plus élevés !`;
-		} else if (pokemon1.psychicDmg < pokemon2.psychicDmg) {
-			return `Il a des dégâts de type psy moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Psychic ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Psychic)
+	) {
+		if (pokemon1.psychicDmg) {
+			if (pokemon1.psychicDmg > 1) {
+				return `Le pokemon est faible face à ton type psy !`;
+			} else if (pokemon1.psychicDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type psy !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareBugDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.bugDmg && pokemon2.bugDmg) {
-		if (pokemon1.bugDmg > pokemon2.bugDmg) {
-			return `Il a des dégâts de type insecte plus élevés !`;
-		} else if (pokemon1.bugDmg < pokemon2.bugDmg) {
-			return `Il a des dégâts de type insecte moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Bug ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Bug)
+	) {
+		if (pokemon1.bugDmg) {
+			if (pokemon1.bugDmg > 1) {
+				return `Le pokemon est faible face à ton type insecte !`;
+			} else if (pokemon1.bugDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type insecte !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareRockDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.rockDmg && pokemon2.rockDmg) {
-		if (pokemon1.rockDmg > pokemon2.rockDmg) {
-			return `Il a des dégâts de type roche plus élevés !`;
-		} else if (pokemon1.rockDmg < pokemon2.rockDmg) {
-			return `Il a des dégâts de type roche moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Rock ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Rock)
+	) {
+		if (pokemon1.rockDmg) {
+			if (pokemon1.rockDmg > 1) {
+				return `Le pokemon est faible face à ton type roche !`;
+			} else if (pokemon1.rockDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type roche !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareGhostDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.ghostDmg && pokemon2.ghostDmg) {
-		if (pokemon1.ghostDmg > pokemon2.ghostDmg) {
-			return `Il a des dégâts de type spectre plus élevés !`;
-		} else if (pokemon1.ghostDmg < pokemon2.ghostDmg) {
-			return `Il a des dégâts de type spectre moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Ghost ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Ghost)
+	) {
+		if (pokemon1.ghostDmg) {
+			if (pokemon1.ghostDmg > 1) {
+				return `Le pokemon est faible face à ton type spectre !`;
+			} else if (pokemon1.ghostDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type spectre !`;
+			}
 		}
 	}
 	return ``;
 }
 
 function compareDragonDmg(pokemon1: Pokemon, pokemon2: Pokemon): string {
-	if (pokemon1.dragonDmg && pokemon2.dragonDmg) {
-		if (pokemon1.dragonDmg > pokemon2.dragonDmg) {
-			return `Il a des dégâts de type dragon plus élevés !`;
-		} else if (pokemon1.dragonDmg < pokemon2.dragonDmg) {
-			return `Il a des dégâts de type dragon moins élevés !`;
+	if (
+		pokemon2.type1 === PokemonType.Dragon ||
+		(pokemon2.type2 && pokemon2.type2 === PokemonType.Dragon)
+	) {
+		if (pokemon1.dragonDmg) {
+			if (pokemon1.dragonDmg > 1) {
+				return `Le pokemon est faible face à ton type dragon !`;
+			} else if (pokemon1.dragonDmg < 1) {
+				return `Le pokemon ne craint pas beaucoup ton type dragon !`;
+			}
 		}
 	}
 	return ``;
