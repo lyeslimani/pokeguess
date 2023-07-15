@@ -38,14 +38,27 @@ function getHint(pokemonToFind: Pokemon, pokemon: Pokemon): string {
 		compareEvolutions,
 		compareLegendary,
 	];
-	const result = ``;
+
+	const hintUsed: ((pokemonToFind: Pokemon, pokemon: Pokemon) => string)[] =
+		[];
+
+	let result = ``;
 	while (result === ``) {
-		const randomIndex = Math.floor(
-			Math.random() * comparisonFunctions.length,
+		const remainingFunctions = comparisonFunctions.filter(
+			(func) => !hintUsed.includes(func),
 		);
-		const result = comparisonFunctions[randomIndex](pokemonToFind, pokemon);
+		if (remainingFunctions.length === 0) {
+			break;
+		}
+
+		const randomIndex = Math.floor(
+			Math.random() * remainingFunctions.length,
+		);
+		const randomFunction = remainingFunctions[randomIndex];
+		result = comparisonFunctions[randomIndex](pokemonToFind, pokemon);
+		hintUsed.push(randomFunction);
 	}
-	return result;
+	return result || `Aucun indice disponible.`;
 }
 
 function compareNumber(pokemon1: Pokemon, pokemon2: Pokemon): string {
