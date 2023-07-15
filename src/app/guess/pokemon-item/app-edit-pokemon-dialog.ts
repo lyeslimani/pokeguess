@@ -25,26 +25,30 @@ import * as GuessActions from '../redux/guess.actions';
 import { PokemonType, pokemonTypes } from '../../shared/enums/pokemonTypes';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { TranslationKeys } from '../../keys.interface';
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
 	selector: `app-edit-pokemon-dialog`,
 	templateUrl: `app-edit-pokemon-dialog.html`,
 	standalone: true,
-	imports: [
-		MatDialogModule,
-		MatButtonModule,
-		MatChipsModule,
-		NgStyle,
-		MatInputModule,
-		ReactiveFormsModule,
-		MatIconModule,
-		NgIf,
-		NgForOf,
-		MatOptionModule,
-		MatSelectModule,
-	],
+  imports: [
+    MatDialogModule,
+    MatButtonModule,
+    MatChipsModule,
+    NgStyle,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    NgIf,
+    NgForOf,
+    MatOptionModule,
+    MatSelectModule,
+    TranslateModule,
+  ],
 })
 export class AppEditPokemonDialogComponent implements OnInit {
+	translationKeys = TranslationKeys;
 	image = getImageUrl(this.data.pokemon);
 	isImageDeleted = false;
 	type1 = `None`;

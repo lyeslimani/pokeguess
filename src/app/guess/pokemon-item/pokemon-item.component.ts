@@ -10,6 +10,7 @@ import { ConfirmDuplicationDialogComponent } from './app-confirm-duplication-dia
 import { AppDialogDataExampleDialogComponent } from './app-pokemon-item-dialog';
 import { getTypeColor } from '../../shared/tools/getTypeColor';
 import { AppEditPokemonDialogComponent } from './app-edit-pokemon-dialog';
+import { TranslationKeys } from '../../keys.interface';
 
 export interface PokemonDialogData {
 	pokemon: Pokemon;
@@ -25,6 +26,7 @@ export interface ConfirmDeletionDialogData {
 	styleUrls: [`./pokemon-item.component.scss`],
 })
 export class PokemonItemComponent implements OnInit {
+	translationKeys = TranslationKeys;
 	@Input() pokemon!: Pokemon;
 	imageUrl?: string;
 

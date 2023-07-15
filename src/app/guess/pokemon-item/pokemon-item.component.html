@@ -39,15 +39,15 @@
 	<mat-menu #menu="matMenu">
 		<button mat-menu-item (click)="openEditDialog()">
 			<mat-icon>edit</mat-icon>
-			<span>Edit</span>
+			<span>{{ translationKeys.edit | translate }}</span>
 		</button>
-		<button mat-menu-item (click)="openDuplicationDialog()">
-			<mat-icon>file_copy</mat-icon>
-			<span>Duplicate</span>
-		</button>
+    <button mat-menu-item (click)="openDuplicationDialog()">
+      <mat-icon>file_copy</mat-icon>
+      <span>{{ translationKeys.duplicate | translate }}</span>
+    </button>
 		<button mat-menu-item (click)="openDeletionDialog()">
 			<mat-icon>delete</mat-icon>
-			<span>Delete</span>
+			<span>{{ translationKeys.delete | translate }}</span>
 		</button>
 	</mat-menu>
 </div>

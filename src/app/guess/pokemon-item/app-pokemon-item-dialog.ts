@@ -10,14 +10,17 @@ import { MatChipsModule } from '@angular/material/chips';
 import { getImageUrl } from '../../shared/tools/getPokemonPhotoUrl';
 import { PokemonDialogData } from './pokemon-item.component';
 import { getTypeColor } from '../../shared/tools/getTypeColor';
+import { TranslationKeys } from '../../keys.interface';
+import {TranslateModule} from "@ngx-translate/core";
 @Component({
 	selector: `app-pokemon-item-dialog`,
 	templateUrl: `app-pokemon-item-dialog.html`,
 	styleUrls: [`./pokemon-item.component.scss`],
 	standalone: true,
-	imports: [MatDialogModule, NgIf, MatButtonModule, MatChipsModule, NgStyle],
+  imports: [MatDialogModule, NgIf, MatButtonModule, MatChipsModule, NgStyle, TranslateModule],
 })
 export class AppDialogDataExampleDialogComponent {
+	translationKeys = TranslationKeys;
 	photoUrl = getImageUrl(this.data.pokemon);
 
 	constructor(

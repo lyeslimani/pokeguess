@@ -2,7 +2,7 @@
 <div mat-dialog-content>
 	<div class="pokemon-details">
 		<mat-form-field class="w-full">
-			<mat-label>Name</mat-label>
+			<mat-label>{{ translationKeys.name | translate }}</mat-label>
 			<input
 				matInput
 				type="text"
@@ -24,10 +24,10 @@
 				alt="{{ data.pokemon.name }}'s picture" />
 			<div *ngIf="isImageDeleted">
 				<button mat-button (click)="cancelImageDeletion()">
-					Cancel
+          {{ translationKeys.cancel | translate }}
 				</button>
 				<mat-form-field class="w-full">
-					<mat-label>Picture URL</mat-label>
+					<mat-label>{{ translationKeys.pictureURL | translate }}</mat-label>
 					<input
 						matInput
 						type="text"
@@ -35,16 +35,16 @@
 				</mat-form-field>
 			</div>
 			<button *ngIf="!isImageDeleted" mat-button (click)="deleteImage()">
-				Delete picture
+        {{ translationKeys.deletePicture | translate }}
 			</button>
 		</div>
 
 		<div>
 			<div class="mb-5">
 				<div>
-					<span>Height:</span>
+					<span>{{ translationKeys.height | translate }}:</span>
 					<mat-form-field class="w-full">
-						<mat-label>Height</mat-label>
+						<mat-label>{{ translationKeys.height | translate }}</mat-label>
 						<input
 							matInput
 							type="number"
@@ -52,9 +52,9 @@
 					</mat-form-field>
 				</div>
 				<div>
-					<span>Weight:</span>
+					<span>{{ translationKeys.weight | translate }}:</span>
 					<mat-form-field class="w-full">
-						<mat-label>Weight</mat-label>
+						<mat-label>{{ translationKeys.weight | translate }}</mat-label>
 						<input
 							matInput
 							type="number"
@@ -65,9 +65,9 @@
 
 			<div class="mb-5">
 				<div *ngIf="selectedTypes.length < 2">
-					<span>Types:</span>
+					<span>{{ translationKeys.types | translate }}:</span>
 					<mat-form-field class="w-full">
-						<mat-label>Select Types</mat-label>
+						<mat-label>{{ translationKeys.selectTypes | translate }}</mat-label>
 						<mat-select
 							multiple
 							[formControl]="pokemonEditForm.controls.types"
@@ -88,7 +88,7 @@
 					</mat-form-field>
 				</div>
 				<div *ngIf="selectedTypes.length > 0">
-					<span>Types:</span>
+					<span>{{ translationKeys.types | translate }}:</span>
 					<div class="selected-types">
 						<div
 							*ngFor="let type of selectedTypes"
@@ -111,37 +111,37 @@
 			</div>
 
 			<div>
-				<span>Battle Stats:</span>
+				<span>{{ translationKeys.battleStats | translate }}</span>
 				<mat-form-field class="w-full">
-					<mat-label>Attack</mat-label>
+					<mat-label>{{ translationKeys.attack | translate }}</mat-label>
 					<input
 						matInput
 						type="number"
 						[formControl]="pokemonEditForm.controls.attack" />
 				</mat-form-field>
 				<mat-form-field class="w-full">
-					<mat-label>Defense</mat-label>
+					<mat-label>{{ translationKeys.defense | translate }}</mat-label>
 					<input
 						matInput
 						type="number"
 						[formControl]="pokemonEditForm.controls.defense" />
 				</mat-form-field>
 				<mat-form-field class="w-full">
-					<mat-label>Speed</mat-label>
+					<mat-label>{{ translationKeys.speed | translate }}</mat-label>
 					<input
 						matInput
 						type="number"
 						[formControl]="pokemonEditForm.controls.speed" />
 				</mat-form-field>
 				<mat-form-field class="w-full">
-					<mat-label>HP</mat-label>
+					<mat-label>{{ translationKeys.hp | translate }}</mat-label>
 					<input
 						matInput
 						type="number"
 						[formControl]="pokemonEditForm.controls.hp" />
 				</mat-form-field>
 				<mat-form-field class="w-full">
-					<mat-label>Special Attack</mat-label>
+					<mat-label>{{ translationKeys.specialAttack | translate }}</mat-label>
 					<input
 						matInput
 						type="number"
@@ -151,11 +151,11 @@
 		</div>
 	</div>
 
-	<button (click)="onNoClick()" mat-button>Close</button>
+	<button (click)="onNoClick()" mat-button>{{ translationKeys.close | translate }}</button>
 	<button
 		(click)="onSubmit()"
 		[disabled]="pokemonEditForm.invalid"
 		mat-button>
-		Confirm
+    {{ translationKeys.confirm | translate }}
 	</button>
 </div>

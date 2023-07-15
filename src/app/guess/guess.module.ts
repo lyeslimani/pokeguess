@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
 	declarations: [AdminComponent, PokemonItemComponent, GameComponent],
@@ -35,6 +36,7 @@ import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 		ReactiveFormsModule,
 		NgSelectModule,
 		NgOptionHighlightModule,
-	],
+		TranslateModule,
+    ],
 })
 export class GuessModule {}

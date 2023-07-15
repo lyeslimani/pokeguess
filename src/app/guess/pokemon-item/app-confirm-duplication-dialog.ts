@@ -11,14 +11,17 @@ import { Store } from '@ngrx/store';
 import { GuessGlobalState } from '../redux/guess.reducer';
 import { Pokemon } from '../../shared/interfaces/pokemon';
 import { getImageUrl } from '../../shared/tools/getPokemonPhotoUrl';
+import { TranslationKeys } from '../../keys.interface';
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
 	selector: `app-confirm-duplication-dialog`,
 	templateUrl: `app-confirm-duplication-dialog.html`,
 	standalone: true,
-	imports: [MatDialogModule, MatButtonModule],
+  imports: [MatDialogModule, MatButtonModule, TranslateModule],
 })
 export class ConfirmDuplicationDialogComponent {
+  translationKeys = TranslationKeys;
 	constructor(
 		public dialogRef: MatDialogRef<ConfirmDuplicationDialogComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: PokemonDialogData,

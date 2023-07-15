@@ -7,16 +7,16 @@
 		<div>
 			<div class="mb-5">
 				<div>
-					<span>Height:</span>
+					<span>{{ translationKeys.height | translate }}:</span>
 					<span>{{ data.pokemon.height }}</span>
 				</div>
 				<div>
-					<span>Weight:</span>
+					<span>{{ translationKeys.weight | translate }}:</span>
 					<span>{{ data.pokemon.weight }}</span>
 				</div>
 			</div>
 			<div class="mb-5">
-				<span>Types:</span>
+				<span>{{ translationKeys.types | translate }}:</span>
 				<mat-chip-listbox aria-label="Fish selection">
 					<mat-chip-option
 						[ngStyle]="{
@@ -36,16 +36,16 @@
 				</mat-chip-listbox>
 			</div>
 			<div>
-				<span>Battle Stats:</span>
-				<p>Attack: {{ data.pokemon.attack }}</p>
-				<p>Defense: {{ data.pokemon.defense }}</p>
-				<p>Speed: {{ data.pokemon.speed }}</p>
-				<p>HP: {{ data.pokemon.hp }}</p>
-				<p>SP Attack: {{ data.pokemon.special }}</p>
+				<span>{{ translationKeys.battleStats | translate }}:</span>
+				<p>{{ translationKeys.attack | translate }}: {{ data.pokemon.attack }}</p>
+				<p>{{ translationKeys.defense | translate }}: {{ data.pokemon.defense }}</p>
+				<p>{{ translationKeys.speed | translate }}: {{ data.pokemon.speed }}</p>
+				<p>{{ translationKeys.hp | translate }}: {{ data.pokemon.hp }}</p>
+				<p>{{ translationKeys.specialAttack | translate }}: {{ data.pokemon.special }}</p>
 			</div>
 		</div>
 	</div>
 </div>
 <div mat-dialog-actions>
-	<button (click)="onNoClick()" mat-button>Close</button>
+	<button (click)="onNoClick()" mat-button>{{ translationKeys.close | translate }}</button>
 </div>

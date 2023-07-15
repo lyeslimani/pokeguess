@@ -11,7 +11,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+export function HttpLoaderFactory(http: HttpClient) {
+	return new TranslateHttpLoader(http);
+}
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
@@ -31,6 +37,15 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		MatDialogModule,
 		NgSelectModule,
 		FormsModule,
+		HttpClientModule,
+		TranslateModule.forRoot({
+			defaultLanguage: `en`,
+			loader: {
+				provide: TranslateLoader,
+				useFactory: HttpLoaderFactory,
+				deps: [HttpClient],
+			},
+		}),
 	],
 	providers: [],
 	bootstrap: [AppComponent],

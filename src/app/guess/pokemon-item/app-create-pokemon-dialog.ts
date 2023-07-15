@@ -18,25 +18,29 @@ import { GuessGlobalState } from '../redux/guess.reducer';
 import * as GuessActions from '../redux/guess.actions';
 import { MatSelectModule } from '@angular/material/select';
 import { PokemonType, pokemonTypes } from '../../shared/enums/pokemonTypes';
+import { TranslationKeys } from '../../keys.interface';
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
 	selector: `app-create-pokemon-dialog`,
 	templateUrl: `app-create-pokemon-dialog.html`,
 	standalone: true,
-	imports: [
-		CommonModule,
-		MatDialogModule,
-		MatButtonModule,
-		MatChipsModule,
-		NgStyle,
-		MatInputModule,
-		ReactiveFormsModule,
-		MatIconModule,
-		NgIf,
-		MatSelectModule,
-	],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatChipsModule,
+    NgStyle,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    NgIf,
+    MatSelectModule,
+    TranslateModule,
+  ],
 })
 export class AppCreatePokemonDialogComponent {
+	translationKeys = TranslationKeys;
 	pokemonTypes = pokemonTypes;
 	type1 = `None`;
 	type2 = `None`;

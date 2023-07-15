@@ -1,6 +1,6 @@
-<mat-button-toggle (click)="resetStore()">Reset</mat-button-toggle>
-<mat-button-toggle (click)="openCreateDialog()">Create</mat-button-toggle>
-<p *ngIf="(guess$ | async)?.loadingPokemons">Chargement des pokémons</p>
+<mat-button-toggle (click)="resetStore()">{{ translationKeys.reset | translate }}</mat-button-toggle>
+<mat-button-toggle (click)="openCreateDialog()">{{ translationKeys.create | translate }}</mat-button-toggle>
+<p *ngIf="(guess$ | async)?.loadingPokemons">{{ translationKeys.pokemonsLoading | translate }}</p>
 
 <div class="max-h-full overflow-y-scroll">
 	<div
