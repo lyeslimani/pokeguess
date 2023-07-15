@@ -17,9 +17,31 @@
 			</button>
 		</mat-form-field>
 
-		<div>
-			<img [src]="photoUrl" alt="{{ data.pokemon.name }}'s picture" />
+		<div class="mb-5">
+			<img
+				*ngIf="!isImageDeleted"
+				[src]="image"
+				alt="{{ data.pokemon.name }}'s picture" />
+			<div *ngIf="isImageDeleted">
+				<button mat-button (click)="cancelImageDeletion()">
+					Cancel
+				</button>
+				<mat-form-field class="w-full">
+					<mat-label>Picture URL</mat-label>
+					<input
+						matInput
+						type="text"
+						[formControl]="pokemonEditForm.controls.image" />
+				</mat-form-field>
+			</div>
+			<button
+				*ngIf="!isImageDeleted"
+				mat-button
+				(click)="deleteImage()">
+				Delete picture
+			</button>
 		</div>
+
 		<div>
 			<div class="mb-5">
 				<div>

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
 	MAT_DIALOG_DATA,
 	MatDialogModule,
@@ -38,10 +38,16 @@ import * as GuessActions from '../redux/guess.actions';
 		NgIf,
 	],
 })
-export class AppEditPokemonDialogComponent {
-	photoUrl = getImageUrl(this.data.pokemon);
+export class AppEditPokemonDialogComponent implements OnInit {
+	image = getImageUrl(this.data.pokemon);
+	isImageDeleted = false;
+
 	pokemonEditForm = new FormGroup({
 		name: new FormControl(this.data.pokemon.name, {
+			nonNullable: true,
+			validators: [Validators.required],
+		}),
+		image: new FormControl(this.data.pokemon.image, {
 			nonNullable: true,
 			validators: [Validators.required],
 		}),
@@ -82,6 +88,10 @@ export class AppEditPokemonDialogComponent {
 		private store: Store<GuessGlobalState>,
 	) {}
 
+	ngOnInit() {
+		this.pokemonEditForm.controls.image.setValue(this.image);
+	}
+
 	onNoClick(): void {
 		this.dialogRef.close();
 	}
@@ -96,6 +106,7 @@ export class AppEditPokemonDialogComponent {
 		return {
 			...this.data.pokemon,
 			name: this.pokemonEditForm.controls.name.value,
+			image: this.pokemonEditForm.controls.image.value,
 			height: this.pokemonEditForm.controls.height.value,
 			weight: this.pokemonEditForm.controls.weight.value,
 			attack: this.pokemonEditForm.controls.attack.value,
@@ -104,5 +115,13 @@ export class AppEditPokemonDialogComponent {
 			speed: this.pokemonEditForm.controls.speed.value,
 			special: this.pokemonEditForm.controls.special.value,
 		};
+	}
+	deleteImage(): void {
+		this.isImageDeleted = true;
+		this.pokemonEditForm.controls.image.setValue(``);
+	}
+
+	cancelImageDeletion(): void {
+		this.isImageDeleted = false;
 	}
 }
