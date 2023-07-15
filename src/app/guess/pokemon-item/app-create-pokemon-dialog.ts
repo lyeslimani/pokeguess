@@ -47,6 +47,10 @@ export class AppCreatePokemonDialogComponent {
 			nonNullable: true,
 			validators: [Validators.required],
 		}),
+		image: new FormControl(``, {
+			nonNullable: true,
+			validators: [Validators.required],
+		}),
 		height: new FormControl(``, {
 			nonNullable: true,
 			validators: [Validators.required],
@@ -126,6 +130,7 @@ export class AppCreatePokemonDialogComponent {
 	getFormValues(): Partial<Pokemon> {
 		return {
 			name: this.pokemonCreateForm.controls.name.value,
+			image: this.pokemonCreateForm.controls.image.value,
 			height: parseFloat(this.pokemonCreateForm.controls.height.value),
 			weight: parseFloat(this.pokemonCreateForm.controls.weight.value),
 			type1: this.type1,
